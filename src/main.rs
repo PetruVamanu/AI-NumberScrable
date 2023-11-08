@@ -1,3 +1,5 @@
+use std::process::exit;
+
 use tic_tac_toe::{state::State, minmax::get_next_move};
 
 fn main() {
@@ -23,7 +25,8 @@ fn main() {
         } else {
             match get_next_move(&actual_state){
                 Some(state) => actual_state = state.clone(),
-                None => println!("No more moves"),
+                None => {println!("No more moves");
+                exit(0);},
             };
         }
     }

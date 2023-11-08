@@ -115,7 +115,7 @@ impl State{
     pub fn min_max_heuristic(&self) -> i32{
         let (is_final, winner) = self.is_final_state();
         if is_final{
-            if winner == self.current_player{ // 3 - self.current_player
+            if winner == 3 - self.current_player{ // 3 - self.current_player
                 return 100;
             }
             else {return -100;}
