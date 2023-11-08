@@ -4,7 +4,7 @@ use tic_tac_toe::{state::State, minmax::get_next_move};
 
 fn main() {
     let mut actual_state = State::new();
-    println!("{}", actual_state.is_final_state().0);
+    
     while !actual_state.is_final_state().0 {
         actual_state.print();
         if actual_state.current_player == 1 {
@@ -23,6 +23,7 @@ fn main() {
             }
             
         } else {
+            println!();
             match get_next_move(&actual_state){
                 Some(state) => actual_state = state.clone(),
                 None => {println!("No more moves");
@@ -36,4 +37,5 @@ fn main() {
         (true, 0) => println!("Draw"),
         _ => println!("Error"),
     }
+    actual_state.print();
 }

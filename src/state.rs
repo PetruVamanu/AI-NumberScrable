@@ -1,4 +1,4 @@
-use crate::constants::INDEXES;
+use crate::constants::{INDEXES, NUMBER_SQUARE};
 #[derive(Clone)]
 pub struct State{
     matrix :  [[i32; 3]; 3],
@@ -75,6 +75,11 @@ impl State{
 
     pub fn print(&self){
         for i in 0..3{
+            
+            for j in 0..3{
+                print!("{} ", NUMBER_SQUARE[i][j]);
+            }
+            print!("        ");
             for j in 0..3{
                 print!("{} ", self.matrix[i][j]);
             }
@@ -115,12 +120,15 @@ impl State{
     pub fn min_max_heuristic(&self) -> i32{
         let (is_final, winner) = self.is_final_state();
         if is_final{
-            if winner == 3 - self.current_player{ // 3 - self.current_player
+            if winner == 1{
                 return 100;
             }
-            else {return -100;}
+            else if winner == 2 {return -100;}
+            else {
+                return  self.heuristic(3-self.current_player) - self.heuristic(self.current_player);
+            }
         }
-        self.heuristic(self.current_player) - self.heuristic(3-self.current_player)
+        self.heuristic(3-self.current_player) - self.heuristic(self.current_player)
     }
 
 
